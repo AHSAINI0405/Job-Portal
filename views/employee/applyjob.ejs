@@ -1,0 +1,145 @@
+<%- include('partials/header.ejs') %>
+<% if(!success){ %>
+    <h1 class="text-[30px] text-red-500 font-bold">Please Fill All Field</h1>
+  <% } else{ %>
+<div class="flex h-screen w-[90%] gap-4  align-items-center justify-center place-self-center">
+    <div class="bg-white shadow-lg rounded-2xl border border-red-300 pl-5 w-[50%] h-screen max-w-2xl mx-auto  mt-4">
+  <h2 class="text-3xl font-bold text-red-500 mb-4 border-b pb-2">Job Information</h2>
+
+  <div class="mb-4">
+    <p class="text-lg font-semibold text-gray-700">Title:</p>
+    <p class="text-gray-800 text-xl"><%= job.title %></p>
+  </div>
+
+  <div class="mb-4">
+    <p class="text-lg font-semibold text-gray-700">Description:</p>
+    <p class="text-gray-600"><%= job.description %></p>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4 mb-4">
+    <div>
+      <p class="text-lg font-semibold text-gray-700">Salary:</p>
+      <p class="text-gray-800"><%= job.salary %></p>
+    </div>
+
+    <div>
+      <p class="text-lg font-semibold text-gray-700">Vacancy:</p>
+      <p class="text-gray-800"><%= job.vacancy %></p>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <p class="text-lg font-semibold text-gray-700">Required Skills:</p>
+    <p class="text-gray-800"><%= job.skills %></p>
+  </div>
+
+  <div class="mb-4">
+    <p class="text-lg font-semibold text-gray-700">Education Required:</p>
+    <p class="text-gray-800"><%= job.education %></p>
+  </div>
+
+  <div class="mb-4">
+    <p class="text-lg font-semibold text-gray-700">Application Deadline:</p>
+    <p class="text-red-600 font-medium"><%= job.lastDate.toDateString() %></p>
+  </div>
+</div>
+
+   <form action="/employee/applyjob/<%= job._id %>" method="POST" class="w-[50%] h-auto overflow-scroll bg-green-100 border-2 border-green-500 rounded-2xl p-6 shadow-lg text-gray-800 space-y-4 font-sans mt-4 mr-5">
+
+  <h2 class="text-2xl font-bold text-green-700 border-b border-green-300 pb-2 mb-4">User Experience</h2>
+
+  <div>
+    <label class="font-semibold">First Name:</label>
+    <input required type="text" id="firstname" name="firstname" value="<%= user.fullname.firstname %>" class="w-full p-2 rounded border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+  </div>
+
+  <div>
+    <label class="font-semibold">Last Name:</label>
+    <input required type="text" name="lastname" value="<%= user.fullname.lastname %>" class="w-full p-2 rounded border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+  </div>
+
+  <div>
+    <label class="font-semibold">Summary:</label>
+    <textarea name="summary" rows="3" class="w-full p-2 rounded border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400"><%= user.summary %></textarea>
+  </div>
+
+  <div>
+    <label class="font-semibold">Mobile:</label>
+    <input required type="text" name="mobile" value="<%= user.mobile %>" class="w-full p-2 rounded border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+  </div>
+
+  <div>
+    <label class="font-semibold">Education:</label>
+    <input required type="text" name="education" value="<%= user.education %>" class="w-full p-2 rounded border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+  </div>
+
+  <div>
+    <label class="font-semibold">Skills:</label>
+    <input required type="text" name="skills" value="<%= user.skills %>" class="w-full p-2 rounded border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+  </div>
+
+ 
+
+  <div class="flex space-x-4">
+    <div class="flex-1">
+      <label class="font-semibold">City:</label>
+      <input required type="text" name="city" value="<%= user.city %>" class="w-full p-2 rounded border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+    </div>
+    <div class="flex-1">
+      <label class="font-semibold">State:</label>
+      <input required type="text" name="state" value="<%= user.state %>" class="w-full p-2 rounded border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+    </div>
+  </div>
+
+  <div>
+    <label class="font-semibold">Experience:</label>
+    <input required type="text" name="experience" value="<%= user.experience %>" class="w-full p-2 rounded border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+  </div>
+
+<div>
+    <label class="font-semibold">Current Profession:</label>
+    <input required type="text" name="currentprof" value="<%= user.currentprofession %>" class="w-full p-2 rounded border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+  </div>
+
+  <div>
+    <label class="font-semibold">Email:</label>
+    <input required type="email" name="email" value="<%= user.email %>" class="w-full p-2 rounded border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+  </div>
+  <div class="flex">
+<div class="flex">
+    <label class="font-semibold">Current CTC:</label>
+    <input required type="number" name="current_ctc" placeholder="per Annum" min="0" class="w-full p-2 rounded border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+</div>
+<div class="flex">
+    <label class="font-semibold">Expected CTC:</label>
+    <input required type="number" name="exp_ctc" placeholder="per Annum" min="0" class="w-full p-2 rounded border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+</div>
+</div>
+
+<div>
+    <label class="font-semibold">Job Type You  Want:</label>
+    <select name="jobtype" class="bg-red-200">
+        <option value="">Select Job type</option>
+        <option value="hybrid">Hybrid</option>
+        <option value="remote">Remote</option>
+        <option value="onsite">On site</option>
+    </select>
+</div>
+  <div>
+    <% if (user.resume) { %>
+      <p class="mt-2 text-sm">
+        Existing: 
+        <input type="text" name="resume" value="<%= user.resume %>" readonly> 
+        <a href="/uploads/resumes/<%= user.resume %>" class="text-blue-600 underline hover:text-blue-800" target="_blank">View Current Resume</a>
+      </p>
+    <% } %>
+  </div>
+
+  <div class="pt-4">
+    <button type="submit"  class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Apply</button>
+  </div>
+</form>
+
+
+</div>
+<% } %>

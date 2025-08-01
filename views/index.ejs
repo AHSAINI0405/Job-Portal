@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Portal Login Signup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="h-screen relative font-[Poppins]">
+  <div class="absolute inset-0 bg-[url('images/home.jpeg')] bg-cover bg-center filter blur-sm z-0"></div>
+
+  <div class="relative z-10">
+    <header>
+      <nav class="navbar bg-black text-white text-[50px] px-4 py-2">
+        <div class="logo">
+          <span>Job Portal</span>
+        </div>
+      </nav>
+    </header>
+
+    <div class="portalbio m-5">
+      <div class="bio place-center">
+        <div class="title text-[40px] font-bold text-green-600">Connecting Talent with Opportunity</div>
+        <div class="detail text-[25px] font-semibold text-green-400">Whether you're searching for a job or the perfect candidate — we make it happen.</div>
+        
+        <div class="items flex m-5 justify-center gap-10 w-full">
+          <a href="./employee" class="text-blue-600 text-[40px] font-semibold border-2 px-4 py-2 bg-gray-200 hover:bg-violet-500 hover:text-[45px] hover:text-white">As User</a>
+          <a href="./employeer" class="text-blue-600 text-[40px] font-semibold border-2 px-4 py-2 bg-gray-200 hover:bg-violet-500 hover:text-[45px] hover:text-white">As Organization</a>
+        </div>
+      </div>
+
+      <div class="categories flex flex-col text-white text-[30px] m-5 w-fit">
+        <div class=" flex w-fit rounded-full mb-3 bg-sky-700 p-2 text-[40px] font-bold">Categories</div>
+        <div class="flex gap-4">
+        <div class="bg-sky-300 p-2 rounded-full">Tech & IT</div>
+        <div class="bg-sky-300 p-2 rounded-full">Healthcare</div>
+        <div class="bg-sky-300 p-2 rounded-full">Work from Home</div>
+        <div class="bg-sky-300 p-2 rounded-full">Remote</div>
+        <div class="bg-sky-300 p-2 rounded-full">Finance</div>
+        </div>
+      </div>
+    </div>
+    <%- include ('./employee/partials/footer.ejs') %>
+  </div>
+</body>
+</html>
+

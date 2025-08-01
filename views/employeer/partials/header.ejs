@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <header>
+    <header  class=" flex justify-between bg-black text-white items-align-center">
+        <div class="logo  text-[40px]">Job Portal</div>
+        <ul class="flex gap-3  text-[25px]  ">
+            <a href="../addNewJob" class=" active:bg-blue-600 cursor-pointer hover:bg-violet-700 p-2">Add New Jobs</a>
+            <a href="/employeer/dashboard" class="cursor-pointer hover:bg-violet-700 p-2">Manage Jobs</a>
+            <a href="/employeer/applications" class="cursor-pointer hover:bg-violet-700 p-2 ">Application Received</a>
+        </ul>
+        <div class="profile text-[25px] gap-4 flex">
+                <% if (sessionUser) { %>
+  <p class="p-4">Welcome, <%= sessionUser.name %></p>
+<% } else { %>
+  <script>alert("login First")</script>
+<% } %>
+            <a href="/logout" class="cursor-pointer hover:bg-violet-700 p-4 logout">Logout</a>
+            <a href="/companyprofile" class="cursor-pointer hover:bg-violet-700 p-4">Profile</a>
+        
+        </div>
+    </header>
+    </header>
+</body>
+</html>

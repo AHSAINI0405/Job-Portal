@@ -1,0 +1,168 @@
+<%- include('partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Company Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="bg-sky-100 font-sans">
+<% if(success && message){ %>
+  <h1 class="text-[30px] text-[green] place-items-center place-self-center"><%= message %></h1>
+<% } %>
+  <% if (!success) { %>
+    <div class="flex flex-col items-center justify-center  text-center">
+      <h1 class="text-3xl text-red-600 mb-4 font-semibold">Complete your profile first</h1>
+      <button onclick="updateForm()"
+        class="px-6 py-3 text-white bg-blue-500 hover:bg-blue-700 rounded-xl text-xl transition">
+        Update
+      </button>
+    </div>
+  <% } else { %>
+
+    <div id="container" class="flex flex-col items-center py-10 w-full">
+      <h1 class="text-[48px] font-bold text-gray-800 mb-6">Company Profile</h1>
+
+      <div class="bg-white shadow-lg rounded-2xl w-[80%] p-6 space-y-6">
+
+        <div class="flex items-center space-x-4">
+          <img src="/uploads/logo/<%= profile && profile.logo ? profile.logo : 'default.jpg' %>" alt="logo"
+            class="w-20 h-20 object-cover rounded-full border-2 border-gray-300" />
+          <div>
+            <h2 class="text-2xl font-bold text-gray-700"><%= profile.companyname %></h2>
+            <p class="text-gray-500"><%= profile.companytype %></p>
+          </div>
+        </div>
+
+        <div class="text-lg text-gray-700">
+          <strong>Bio:</strong> <p class="pl-2 pt-1"><%= profile.bio %></p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-800">
+          <div>
+            <strong>Mobile:</strong>
+            <p><%= profile.mobile %></p>
+          </div>
+          <div>
+            <strong>Email:</strong>
+            <p><%= profile.email %></p>
+          </div>
+          <div>
+            <strong>Address:</strong>
+            <p><%= profile.address %>, <%= profile.city %>, <%= profile.state %></p>
+          </div>
+          <div>
+            <strong>Social Profiles:</strong>
+            <div class="flex space-x-4 mt-2 text-blue-600 text-3xl">
+              <a href="<%= profile.socialprofile.linkedin %>" target="_blank"><i class="fab fa-linkedin"></i></a>
+              <a href="<%= profile.socialprofile.facebook %>" target="_blank"><i class="fab fa-facebook"></i></a>
+              <a href="<%= profile.socialprofile.twitter %>" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-6">
+          <button onclick="updateForm()"
+            class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-800 text-xl transition">
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+  <% } %>
+
+  <!-- Update Form -->
+  <div class="update hidden flex justify-center py-10 bg-green-50 w-full">
+    <form action="/companyprofile/create" method="POST" enctype="multipart/form-data"
+      class="bg-white w-[90%] md:w-[70%]  rounded-xl p-8 space-y-6">
+
+      <h2 class="text-3xl font-bold text-center text-gray-800">Update Profile</h2>
+
+      
+      <div class="space-y-4">
+        <label class="block font-semibold">Logo</label>
+        <input type="file" name="logo" accept="image/*" class="p-2 border rounded w-full bg-white" />
+
+        <label class="block font-semibold">Company Name</label>
+        <input type="text" name="companyname" placeholder="Enter company name" required
+          value="<%= profile?.companyname || '' %>"
+          class="p-2 border rounded w-full bg-purple-100" />
+
+        <label class="block font-semibold">Bio</label>
+        <textarea name="bio" rows="3" placeholder="Write a short bio"
+          class="p-2 border rounded w-full bg-purple-100"><%= profile?.bio || '' %></textarea>
+
+        <label class="block font-semibold">Company Type</label>
+        <select name="companytype" class="p-2 border rounded w-full bg-purple-100" required>
+          <option value="">Select Type</option>
+          <option value="Startup" <%= profile?.companytype === 'Startup' ? 'selected' : '' %>>Startup</option>
+          <option value="MNC" <%= profile?.companytype === 'MNC' ? 'selected' : '' %>>MNC</option>
+          <option value="Private" <%= profile?.companytype === 'Private' ? 'selected' : '' %>>Private</option>
+          <option value="Government" <%= profile?.companytype === 'Government' ? 'selected' : '' %>>Government</option>
+        </select>
+      </div>
+
+      
+      <div class="space-y-4">
+        <label class="block font-semibold">Mobile</label>
+        <input type="tel" name="mobile" placeholder="10-digit mobile number" pattern="[0-9]{10}" required
+          value="<%= profile?.mobile %>" class="p-2 border rounded w-full bg-purple-100" />
+
+        <label class="block font-semibold">Email</label>
+        <input type="email" name="email" placeholder="example@domain.com" required
+          value="<%= profile?.email %>" class="p-2 border rounded w-full bg-purple-100" />
+
+        <label class="block font-semibold">Social Profiles</label>
+        <input type="url" name="linkedin" placeholder="https://linkedin.com/company/example"
+          value="<%= profile?.socialprofile?.linkedin %>" class="p-2 border rounded w-full bg-purple-100" />
+        <input type="url" name="facebook" placeholder="https://facebook.com/company/example"
+          value="<%= profile?.socialprofile?.facebook %>" class="p-2 border rounded w-full bg-purple-100" />
+        <input type="url" name="twitter" placeholder="https://twitter.com/company/example"
+          value="<%= profile?.socialprofile?.twitter %>" class="p-2 border rounded w-full bg-purple-100" />
+      </div>
+
+      
+      <div class="space-y-4">
+        <label class="block font-semibold">Address</label>
+        <textarea name="address" rows="3" placeholder="Enter full address"
+          class="p-2 border rounded w-full bg-purple-100"><%= profile?.address %></textarea>
+
+        <label class="block font-semibold">City</label>
+        <input type="text" name="city" placeholder="Enter city" value="<%= profile?.city %>"
+          class="p-2 border rounded w-full bg-purple-100" />
+
+        <label class="block font-semibold">State</label>
+        <input type="text" name="state" placeholder="Enter state" value="<%= profile?.state %>"
+          class="p-2 border rounded w-full bg-purple-100" />
+      </div>
+
+      
+      <div class="text-center">
+        <button type="submit"
+          class="px-6 py-2 bg-blue-500 text-white rounded-lg text-xl hover:bg-blue-700 transition">
+          Submit
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <script>
+    function updateForm() {
+      document.getElementById("container")?.classList.add("hidden");
+      document.querySelector(".update")?.classList.remove("hidden");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("container")?.classList.remove("hidden");
+      document.querySelector(".update")?.classList.add("hidden");
+    });
+  </script>
+</body>
+
+</html>

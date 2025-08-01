@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Job Portal Login Signup</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+  <header>
+    <nav class="navbar flex justify-between">
+      <div class="logo">
+        <span>Job Portal</span>
+      </div>
+      <!-- <a href="./employee">Login Employee</a> -->
+        <a href="/employeer">Login Organization</a>
+    </nav>
+  </header>
+
+
+  <% if (typeof message !== 'undefined') { %>
+    <p class="<%= success ? 'text-success' : 'text-danger' %> fs-4 text-center my-3"><%= message %></p>
+  <% } %>
+
+  
+  <p class="text-red-800 text-[60px] font-bold text-center my-4">User Login</p>
+
+  <!-- Registration Form -->
+  <form action="/register" method="POST" class="register text-green-900 mx-auto w-full max-w-md p-4 border border-green-700 rounded-xl shadow-md">
+    <h1 class="text-2xl font-semibold mb-4">Registration</h1>
+    <input type="text" name="name" id="reg_name" placeholder="Name" class="name w-full mb-3 p-2 border border-gray-400 rounded" required>
+    <input type="email" name="email" id="reg_email" placeholder="Email" class="email w-full mb-3 p-2 border border-gray-400 rounded" required>
+    <input type="password" name="password" id="reg_password" placeholder="Password (8 chars)" class="password w-full mb-3 p-2 border border-gray-400 rounded" minlength="8" maxlength="8" required>
+    <button type="submit" class="bg-violet-500 hover:bg-violet-600 text-white text-xl w-full py-2 rounded">Register</button>
+    <p class="mt-3">Already Registered? <a href="#" onclick="login(); event.preventDefault();" class="text-blue-500">Login</a></p>
+  </form>
+
+  
+  <% if (success) { %>
+    <script>
+      setTimeout(() => {
+        window.location.href = "employee/employee.html";
+      }, 2000);
+    </script>
+  <% } %>
+
+  <!-- Login Form -->
+  <form action="/login" method="POST" class="login text-green-900 pt-[80px] mx-auto w-full max-w-md p-4 border border-green-700 rounded-xl shadow-md">
+    <h1 class="text-2xl font-semibold mb-4">Login</h1>
+    <input type="email" placeholder="Email" id="email" name="email" class="email w-full mb-3 p-2 border border-gray-400 rounded" required>
+    <input type="password" placeholder="Password (8 chars)" id="password" name="password" class="password w-full mb-3 p-2 border border-gray-400 rounded" minlength="8" maxlength="8" required>
+    <input type="submit" value="Login" class="bg-violet-500 hover:bg-violet-600 text-white text-xl w-full py-2 rounded">
+    <p class="mt-3">Not Registered? <a href="#" onclick="register(); event.preventDefault();" class="text-blue-500">Register</a></p>
+  </form>
+
+  
+  <script>
+    function login() {
+      document.querySelector(".register").style.display = "none";
+      document.querySelector(".login").style.display = "block";
+    }
+
+    function register() {
+      document.querySelector(".register").style.display = "block";
+      document.querySelector(".login").style.display = "none";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelector(".register").style.display = "none";
+      document.querySelector(".login").style.display = "block";
+    });
+  </script>
+</body>
+</html>

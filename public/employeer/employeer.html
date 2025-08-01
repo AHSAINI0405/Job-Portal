@@ -1,0 +1,55 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Job Portal Login Signup</title>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/css/bootstrap.min.css" integrity="sha512-fw7f+TcMjTb7bpbLJZlP8g2Y4XcCyFZW8uy8HsRZsH/SwbMw0plKHFHr99DN3l04VsYNwvzicUX/6qurvIxbxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar">
+    <div class="logo">
+        <span>Job Portal</span>
+        </div>
+        
+    </nav>
+        </header>
+            <p class="text-red-800 text-[60px] font-bold place-self-center">Employer Login</p>
+            <form class="register text-green-900"><h1>Registration</h1>
+                <input type="text" placeholder="Name" id="name" class="name"><br>
+                <input type="email" placeholder="Email" id="email" class="email"><br>
+                <input type="password" placeholder="Password" id="password" class="password" minlength="8" maxlength="8" required><br>
+                <input type="button" value="Register" class="bg-violet-500 hover:bg-violet-600 text-white text-[40px]">
+                <p>Already Registered? <a href="#" onclick="login(); event.preventDefault();">Login</a></p>
+            </form>
+            <form class="login text-green-900 pt-[80px]">
+                <h1>Login</h1>
+                <input type="email" placeholder="Email" id="email" class="email"><br>
+                <input type="password" placeholder="Password" id="password" class="password" minlength="8" maxlength="8" required><br>
+                <input type="button" value="Login"class="bg-violet-500 hover:bg-violet-600 text-white text-[40px]">
+                <p>Not Registered? <a href="#" onclick="register(); event.preventDefault();">Register</a></p>
+            </form>
+        </div>
+        <script>
+            function login()
+            { 
+                document.querySelector(".register").style.display="none";
+                document.querySelector(".login").style.display="block";
+            }
+            function register()
+            {
+                document.querySelector(".register").style.display="block";
+                document.querySelector(".login").style.display="none";
+            }
+            document.addEventListener("DOMContentLoaded",()=>{
+                document.querySelector(".register").style.display="none";
+                document.querySelector(".login").style.display="block";
+            })
+        </script>
+    </body>
+    </html>
