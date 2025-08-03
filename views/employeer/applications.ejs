@@ -32,7 +32,7 @@
               <%= A.status %>
             </span>
           </span>
-
+          <% if (A.status=='Pending') { %>
           <!-- Approve & Reject buttons -->
           <form action="/employeer/update-status/<%= A._id %>" method="POST" class="flex gap-2">
             <button type="submit" name="status" value="Approved"
@@ -44,6 +44,7 @@
               Reject
             </button>
           </form>
+          <% } %>
         </div>
       </div>
     <% }) %>
