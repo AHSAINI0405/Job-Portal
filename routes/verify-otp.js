@@ -1,4 +1,4 @@
-// POST: /verify-otp
+
 router.post("/verify-otp", async (req, res) => {
   const { otp } = req.body;
   const { tempUser, otp: sessionOtp, otpExpires } = req.session;

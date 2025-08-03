@@ -7,12 +7,13 @@ router.get("/employee/jobs",async (req,res)=>{
 {
  return res.redirect("/")
 }  
-    const userId = req.session.user._id;
-   const appliedJobs = await applied.find({ user_id: userId }, "job_id");
+    const userId = req.session.user?.id;
+   const appliedJobs = await applied.find({ userid: userId }, "job_id");
+   
         const appliedJobIds = appliedJobs.map(app => app.job_id);
 
         
-        const alljobs = await jobs.find({ _id: { $nin: appliedJobIds } });
+        const alljobs = await jobs.find({ _id: { $nin: appliedJobIds}});
 
     if(alljobs){
         res.render("employee/jobs",{

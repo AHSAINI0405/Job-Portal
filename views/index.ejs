@@ -3,47 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Job Portal Login Signup</title>
+  <title>Job Portal | Connect Talent & Opportunity</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
-<body class="h-screen relative font-[Poppins]">
-  <div class="absolute inset-0 bg-[url('images/home.jpeg')] bg-cover bg-center filter blur-sm z-0"></div>
+<body class="h-screen font-[Poppins] relative overflow-x-hidden bg-gray-100">
 
-  <div class="relative z-10">
-    <header>
-      <nav class="navbar bg-black text-white text-[50px] px-4 py-2">
-        <div class="logo">
-          <span>Job Portal</span>
-        </div>
-      </nav>
+  <!-- Background Image -->
+  <div class="absolute inset-0 bg-[url('images/home.jpeg')] bg-cover bg-center brightness-50 z-0"></div>
+
+  <!-- Foreground Content -->
+  <div class="relative z-10 h-full flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-black bg-opacity-70 text-white px-6 py-5 shadow-md">
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-wide">Job Portal</h1>
+        <nav class="hidden sm:flex gap-6 text-lg">
+          <a href="#categories" class="hover:text-green-400 transition">Categories</a>
+          <a href="#join" class="hover:text-green-400 transition">Get Started</a>
+        </nav>
+      </div>
     </header>
 
-    <div class="portalbio m-5">
-      <div class="bio place-center">
-        <div class="title text-[40px] font-bold text-green-600">Connecting Talent with Opportunity</div>
-        <div class="detail text-[25px] font-semibold text-green-400">Whether you're searching for a job or the perfect candidate — we make it happen.</div>
-        
-        <div class="items flex m-5 justify-center gap-10 w-full">
-          <a href="./employee" class="text-blue-600 text-[40px] font-semibold border-2 px-4 py-2 bg-gray-200 hover:bg-violet-500 hover:text-[45px] hover:text-white">As User</a>
-          <a href="./employeer" class="text-blue-600 text-[40px] font-semibold border-2 px-4 py-2 bg-gray-200 hover:bg-violet-500 hover:text-[45px] hover:text-white">As Organization</a>
-        </div>
-      </div>
+    <!-- Hero Section -->
+    <main class="flex-1 flex flex-col items-center justify-center text-center px-4">
+      <div class="max-w-4xl">
+        <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-green-400 drop-shadow-md">
+          Connecting Talent with Opportunity
+        </h2>
+        <p class="mt-4 text-lg sm:text-xl md:text-2xl text-gray-200 font-medium">
+          Whether you're a candidate or a recruiter — we're your bridge to success.
+        </p>
 
-      <div class="categories flex flex-col text-white text-[30px] m-5 w-fit">
-        <div class=" flex w-fit rounded-full mb-3 bg-sky-700 p-2 text-[40px] font-bold">Categories</div>
-        <div class="flex gap-4">
-        <div class="bg-sky-300 p-2 rounded-full">Tech & IT</div>
-        <div class="bg-sky-300 p-2 rounded-full">Healthcare</div>
-        <div class="bg-sky-300 p-2 rounded-full">Work from Home</div>
-        <div class="bg-sky-300 p-2 rounded-full">Remote</div>
-        <div class="bg-sky-300 p-2 rounded-full">Finance</div>
+        <!-- Call to Action Buttons -->
+        <div id="join" class="mt-8 flex flex-col sm:flex-row gap-6 sm:gap-10 justify-center">
+          <a href="./employee"
+             class="text-white text-xl sm:text-2xl font-semibold px-6 py-3 bg-gradient-to-r from-green-400 to-blue-500 rounded-full shadow-lg hover:scale-105 transform transition duration-300">
+            I'm a Job Seeker
+          </a>
+          <a href="./employeer"
+             class="text-white text-xl sm:text-2xl font-semibold px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg hover:scale-105 transform transition duration-300">
+            I'm an Employer
+          </a>
         </div>
       </div>
-    </div>
-    <%- include ('./employee/partials/footer.ejs') %>
+    </main>
+
+    <!-- Job Categories -->
+    <section id="categories" class="bg-white bg-opacity-80 mx-auto w-full max-w-6xl rounded-2xl px-6 py-12 shadow-xl mb-12 mt-6">
+      <h3 class="text-3xl sm:text-4xl font-extrabold text-center text-sky-700 mb-8">Top Job Categories</h3>
+      <div class="flex flex-wrap justify-center gap-4 text-black font-medium">
+        <span class="bg-sky-300 px-5 py-2 rounded-full shadow">Tech & IT</span>
+        <span class="bg-sky-300 px-5 py-2 rounded-full shadow">Healthcare</span>
+        <span class="bg-sky-300 px-5 py-2 rounded-full shadow">Finance</span>
+        <span class="bg-sky-300 px-5 py-2 rounded-full shadow">Work from Home</span>
+        <span class="bg-sky-300 px-5 py-2 rounded-full shadow">Remote</span>
+        <span class="bg-sky-300 px-5 py-2 rounded-full shadow">Education</span>
+        <span class="bg-sky-300 px-5 py-2 rounded-full shadow">Marketing</span>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-6 z-10 text-center text-sm sm:text-base mt-auto">
+      <%- include('./employee/partials/footer.ejs') %>
+    </footer>
+
   </div>
 </body>
 </html>
-

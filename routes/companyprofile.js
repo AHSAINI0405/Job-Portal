@@ -3,12 +3,12 @@ const router = express.Router();
 const profiles = require("../models/co_model");
 const profileLogo = require("../multerconfig");
 router.get("/companyprofile", async (req, res) => {
-      if(!req.session.user)
+      if(!req.session.employer)
 {
  return res.redirect("/")
 }
     try {
-        if(!req.session.user || !req.session.user.id)
+        if(!req.session.employer || !req.session.employer?.id)
         {
              return res.render("employeer/employeer", {
         message: "Login First!",
@@ -17,7 +17,7 @@ router.get("/companyprofile", async (req, res) => {
         message:null
       });
         }
-        const profile = await profiles.findOne({ employerId: req.session.user.id });
+        const profile = await profiles.findOne({ employerId: req.session.employer.id });
         if (!profile) {
             return res.render("employeer/profile", {
                 profile: null,
@@ -34,7 +34,7 @@ router.get("/companyprofile", async (req, res) => {
     }
 });
 router.post("/companyprofile/create",profileLogo.single("logo"),async (req, res) => {
-      if(!req.session.user)
+      if(!req.session.employer)
 {
  return res.redirect("/")
 }
@@ -53,7 +53,7 @@ router.post("/companyprofile/create",profileLogo.single("logo"),async (req, res)
                 state,
             } = req.body;
             const exists = await profiles.findOne({
-                employerId: req.session.user?.id,
+                employerId: req.session.employer?.id,
             });
             const logo = req.file ? req.file.filename : null;
             const profiledata ={
@@ -71,15 +71,15 @@ router.post("/companyprofile/create",profileLogo.single("logo"),async (req, res)
                 address,
                 city,
                 state,
-                employerId: req.session.user?.id,
+                employerId: req.session.employer?.id,
             };
 
             if (exists) {
                 await profiles.updateOne(
-                    { employerId: req.session.user?.id },
+                    { employerId: req.session.employer?.id },
                     { $set:profiledata }
                 );
-                const profile=await profiles.findOne({employerId:req.session.user?.id})
+                const profile=await profiles.findOne({employerId:req.session.employer?.id})
                 return res.render("employeer/profile",{
                     profile,
                     success:true,
@@ -89,7 +89,7 @@ router.post("/companyprofile/create",profileLogo.single("logo"),async (req, res)
             } else {
                 const upProfile=new profiles(profiledata);
                 await upProfile.save();
-                const profile=await profiles.findOne({employerId:req.session.user?.id})
+                const profile=await profiles.findOne({employerId:req.session.employer?.id})
                  return res.render("employeer/profile",{
                     profile,
                     success:true,

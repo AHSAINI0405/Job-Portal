@@ -4,13 +4,13 @@ const path=require('path');
 const Jobs=require("../models/jobs");
 router.get("/employeer/dashboard",async (req,res)=>{
     try{
-       if(!req.session.user)
+       if(!req.session.employer)
 {
  return res.redirect("/")
 }
-        console.log(req.session.user?.name);
-    // const allJobs=await Jobs.find({ employerId: req.session.user.id })
-    const allJobs=await Jobs.find({postedBy:req.session.user?.id})
+        console.log(req.session.employer?.name);
+    // const allJobs=await Jobs.find({ employerId: req.session.employer.id })
+    const allJobs=await Jobs.find({postedBy:req.session.employer?.id})
     return res.render("employeer/dashboard", { jobs: allJobs || [],title:"Dashboard" });
     }
     catch(err){

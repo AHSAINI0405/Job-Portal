@@ -16,8 +16,8 @@
             <a href="/employeer/applications" class="cursor-pointer hover:bg-violet-700 p-2 ">Application Received</a>
         </ul>
         <div class="profile text-[25px] gap-4 flex">
-                <% if (sessionUser) { %>
-  <p class="p-4">Welcome, <%= sessionUser.name %></p>
+                <% if (sessionEmployer) { %>
+  <p class="p-4">Welcome, <%= sessionEmployer.name %></p>
 <% } else { %>
   <script>alert("login First")</script>
 <% } %>

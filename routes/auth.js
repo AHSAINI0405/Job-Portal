@@ -62,7 +62,7 @@ router.post("/register", async (req, res) => {
       html: `<h3>Your OTP is: ${otp}</h3><p>This is valid for 10 minutes.</p>`,
     });
 
-    // ✅ Render OTP entry form
+    
     return res.render("employee/verify-otp", {
       email: email,
       message: "OTP sent to your email",
@@ -178,12 +178,12 @@ router.post("/employer_login", async (req, res) => {
         success: false,
       });
     }
-    req.session.user = {
+    req.session.employer = {
       id: employer._id,
       name: employer.name,
       email: employer.email,
     };
-    if(req.session.user){
+    if(req.session.employer){
     return res.redirect("employeer/dashboard")
     }
   } catch (err) {

@@ -3,13 +3,13 @@ const router=express.Router();
 const appReceived=require('../models/applyjob');
 const nodemailer=require('nodemailer');
 router.get("/employeer/applications",async (req,res)=>{
-    if(!req.session.user)
+    if(!req.session.employer)
 {
  return res.redirect("/")
 }
-    console.log("company name:",req.session.user?.name)
+    console.log("company name:",req.session.employer?.name)
     try{
-        const app=await appReceived.find({companyName:req.session.user?.name})
+        const app=await appReceived.find({companyName:req.session.employer?.name})
         if(app){
             console.log(app);
     return res.render('employeer/applications',{app,title:"Applications"})
@@ -21,7 +21,7 @@ router.get("/employeer/applications",async (req,res)=>{
 })
 // POST route to update status and send email
 router.post('/employeer/update-status/:id', async (req, res) => {
-    if(!req.session.user)
+    if(!req.session.employer)
 {
  return res.redirect("/")
 }
@@ -29,27 +29,27 @@ router.post('/employeer/update-status/:id', async (req, res) => {
   const { status } = req.body;
 
   try {
-    // Find the application by ID
+    
     const application = await appReceived.findByIdAndUpdate(
       id,
       { status },
-      { new: true } // returns updated doc
+      { new: true }
     );
 
     if (!application) {
       return res.status(404).send("Application not found");
     }
 
-    // ✅ Set up Nodemailer transporter
+    
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: "sainikataria2002@gmail.com",       // your Gmail address from .env
-        pass: "kroalnhfwkvnywjp"        // your Gmail app password from .env
+        user: "sainikataria2002@gmail.com",      
+        pass: "kroalnhfwkvnywjp"     
       }
     });
 
-    // ✅ Create email content based on status
+    
     const mailOptions = {
       from: `"${application.companyName} HR" "sainikataria2002@gmail.com"}`,
       to: application.email,
@@ -64,11 +64,11 @@ router.post('/employeer/update-status/:id', async (req, res) => {
       `
     };
 
-    // ✅ Send the email
+    
     await transporter.sendMail(mailOptions);
     console.log(`Email sent to ${application.email} regarding status: ${status}`);
 
-    // Redirect back to applications page
+    
     res.redirect('/employeer/applications');
   } catch (error) {
     console.error("Error updating status or sending email:", error);

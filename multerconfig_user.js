@@ -2,10 +2,10 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
-// ✅ Absolute project root
+
 const rootDir = path.join(__dirname, "public", "uploads");
 
-// ✅ Ensure destination folders exist
+
 const ensureDirectory = (dir) => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
@@ -18,7 +18,7 @@ const resumePath = path.join(rootDir, "resumes");
 ensureDirectory(imagePath);
 ensureDirectory(resumePath);
 
-// ✅ File filter
+
 const fileFilter = (req, file, cb) => {
   const allowedImageTypes = /jpeg|jpg|png|gif/;
   const allowedPdfType = /pdf/;
@@ -31,7 +31,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// ✅ Storage configuration
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const mime = file.mimetype;
@@ -48,7 +48,7 @@ const storage = multer.diskStorage({
   }
 });
 
-// ✅ Multer instance
+
 const upload = multer({
   storage,
   fileFilter

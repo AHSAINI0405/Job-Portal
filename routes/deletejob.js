@@ -3,7 +3,7 @@ const router=express.Router();
 const jobs=require("../models/jobs")
 router.post("/employeer/delete/:id",async (req,res)=>{
 try{
-      if(!req.session.user)
+      if(!req.session.employer)
 {
  return res.redirect("/")
 }
