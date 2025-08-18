@@ -28,7 +28,7 @@ const descArray=description.split('.').map(description=>description.trim());
 const eduArray=education.split('.').map(education=>education.trim());
 try{
     const newJob=new Jobs({
-        title,description:descArray,education:eduArray,skills:skillArray,vacancy,salary,lastDate,companyname:req.session.employer?.name,postedDate:Date.now(),postedBy:req.session.employer?.id
+        title,description:descArray,education:eduArray,skills:skillArray,vacancy,salary,lastDate:new Date(lastDate),companyname:req.session.employer?.name,postedDate:Date.now(),postedBy:req.session.employer?.id
     })
     await newJob.save();
     return res.render("employeer/addNewJob",{
