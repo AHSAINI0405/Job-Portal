@@ -1,0 +1,55 @@
+<%- include('partials/header.ejs') %>
+
+<% if(success) { %>
+  <% company.forEach(function(C) { %>
+    <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-2xl p-8 mt-10 border border-gray-200">
+
+      <!-- Company Name -->
+      <h1 class="text-3xl font-bold text-blue-700 mb-2">
+        <%= C.companyname %>
+      </h1>
+
+      <!-- Company Type -->
+      <p class="text-lg text-gray-700 mb-1">
+        <strong>Type:</strong> <%= C.companytype %>
+      </p>
+
+      <!-- Email -->
+      <p class="text-gray-600 mb-4">
+        <strong>Email:</strong> <%= C.email %>
+      </p>
+
+      <!-- Address Section -->
+      <div class="bg-blue-50 p-4 rounded-lg mb-4">
+        <p class="text-gray-700 mb-1">
+          <strong>Address:</strong> <%= C.address %>
+        </p>
+        <p class="text-gray-700">
+          <strong>City:</strong> <%= C.city %> &nbsp;
+          <strong>State:</strong> <%= C.state %>
+        </p>
+      </div>
+
+      <!-- Social Profile Section -->
+      <div class="mt-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-2">Social Profiles</h2>
+        <div class="flex flex-wrap gap-4 text-blue-600 underline">
+          <% if(C.socialprofile.facebook) { %>
+            <a href="<%= C.socialprofile.facebook %>" target="_blank">Facebook</a>
+          <% } %>
+          <% if(C.socialprofile.linkedin) { %>
+            <a href="<%= C.socialprofile.linkedin %>" target="_blank">LinkedIn</a>
+          <% } %>
+          <% if(C.socialprofile.twitter) { %>
+            <a href="<%= C.socialprofile.twitter %>" target="_blank">Twitter</a>
+          <% } %>
+        </div>
+      </div>
+
+    </div>
+  <% }) %>
+<% } else { %>
+  <div class="text-center text-red-600 mt-10 text-lg font-semibold">
+    Company not found or unable to load details.
+  </div>
+<% } %>

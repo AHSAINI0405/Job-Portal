@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+<h2 class="text-2xl font-bold mb-4 text-center">All Posted Jobs</h2>
+
+<% if (jobs.length > 0) { %>
+  <div class="space-y-4">
+    <% jobs.forEach(job => { %>
+      <div class="p-4 border rounded-md shadow-md bg-white">
+        <h3 class="text-[40px] font-semibold text-indigo-700"><%= job.title %></h3>
+        <p><strong class="text-[30px] underline">Description:</strong> <% job.description.forEach(desc => { %>
+        <li class="text-gray-700 text-[20px]"><%= desc %></li><% })%></p>
+        <p><strong class="text-[30px] underline">Education:</strong> <% job.education.forEach(edu => { %>
+        <li class="text-gray-700 text-[20px]"><%= edu %></li><% })%></p>
+        <p><strong class="text-[30px] underline">Skills:</strong> <% job.skills.forEach(skill => { %>
+        <span class="bg-purple-400 rounded text-[20px] p-1"><%= skill %></span><% })%></p>
+        <div class="place-items-center flex place-content-between "><div><strong class="text-[30px] underline">Vacancy:</strong> <span class="text-gray-700 text-[20px]"> <%= job.vacancy %> </span> </div>
+        <div><strong class="text-[30px] underline">Last Date:</strong> <span class="text-gray-700 text-[20px]"><%= job.lastDate.toDateString() %> </span> </div> </div>
+       <form action="/employeer/delete/<%= job._id %>" method="POST">
+      <button onclick="return confirm('Are you sure?')"  class="text-red-500 text-[30px] font-bold p-1 border-black bg-violet-500 cursor-pointer mt-5 hover:bg-violet-300" type="submit">Delete</button>
+    </form>
+      </div>
+    <% }) %>
+  </div>
+<% } else { %>
+  <p class="text-center text-gray-500">No jobs posted yet.</p>
+<% } %>
+
+
+</body>
+</html>

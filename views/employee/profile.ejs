@@ -1,0 +1,102 @@
+<%- include('partials/header.ejs') %>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta placeholder="" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-violet-300">
+    
+    <% if(!success) {%>
+        <h1 class="text-red-700 place-self-center text-[50px]"> Firstly Please Update Profile</h1>
+        <% } else {%>
+    
+    <div class="profile-view place-self-center p-5 w-150 flex flex-col gap-3 bg-gradient-to-r from-blue-300 to-sky-100" >
+        <h1 class="text-[50px] font-bold place-self-center">My Profile</h1>
+         <img src="/uploads/images/<%= profile.logo %>" alt="logo" class="w-[150px] h-[150px] place-self-center rounded-full"/>
+        <div class="border-b-5 border-red-500">
+        <strong class="text-[30px]"> Full Name:</strong><span class="text-[25px]"> <%= profile.fullname.firstname +" " + profile.fullname.lastname %> <br>
+            <strong class="text-[30px]"> Date of Birth:</strong><span class="text-[25px]"> <%= profile.dateofbirth %> </span><br>
+            <strong class="text-[30px]"> Age:</strong><span class="text-[25px]"> <%= profile.age %> </span><br>
+        </div>
+        <div class="w-full flex flex-col border-b-5 border-red-500">
+            <strong class="text-[30px]"> Summary</strong>
+        <% profile.summary.forEach(function(summ){ %>
+        <li class="text-[20px]"><%= summ %></li>
+         <% }) %>
+        </div>
+        <div ><strong class="text-[30px]">Current Profession:</strong>
+        <span class="text-[25px]" ><%= profile.currentprofession %></span>
+    </div>
+        <div class="border-b-5 border-red-500"><strong class="text-[30px]">Experience</strong>
+        <span class="text-[25px]"><%= profile.experience %> </span></div>
+       <div class="w-full flex flex-col border-b-5 border-red-500">
+        <strong class="text-[30px]">Education</strong>
+        <% profile.education.forEach(function(educ){ %>
+        <li class="text-[20px]"><%= educ %></li>
+         <% }) %>
+        </div>
+        <div ><strong class="text-[30px]">Address:</strong>
+        <p class="text-[24px]"><%= profile.address %>
+            </p>
+        </div>
+        <div class="flex w-full justify-between">
+        <div><strong class="text-[30px]"> City:</strong>
+        <span class="text-[25px]"><%= profile.city %></span>
+        </div>
+        <div>
+        <strong class="text-[30px]">State</strong>
+        <span class="text-[25px]"><%= profile.state %></span>
+        </div>
+       
+    </div>
+     <div>
+            <a href="/uploads/resumes/<%= profile.resume %>" class="bg-violet-400 text-[20px] text-red-500 p-1"> View Resume</a>
+        </div>
+        <button id="update" onclick="onUpdate()" class="w-full bg-green-500 hover:bg-green-300 text-[25px] text-blue-700 font-bold hover:text-[28px] ">Update</button>
+    </div>
+    <% } %>
+    <form method="POST" action="/employee/profile" enctype="multipart/form-data" class="updateForm flex flex-col gap-4 p-5 shadow-lg w-180 place-self-center bg-gradient-to-b from-purple-400 via-pink-400 to-red-400">
+        <h1 class="text-[50px] font-bold text-red-500 place-self-center">Edit Profile</h1>
+        <input type="file" name="logo" accept="image/*"/>
+        <label for="first" class="text-[25px] font-semibold font-[Poppins] text-white">First Name</label>
+        <input type="text" class="bg-blue-200 rounded text-[23px]" placeholder="First Name" value="<%= profile?.fullname?.firstname || ' ' %>" name="fname"> 
+        <label for="last" class="text-[25px] font-semibold font-[Poppins] text-white">Last Name</label>
+        <input type="text" class="bg-blue-200 rounded text-[23px]"  placeholder="Last Name" name="lname" value="<%= profile?.fullname?.lastname || ' ' %>" >
+        <label for="summary" class="text-[25px] font-semibold font-[Poppins] text-white">Summary</label>
+        <textarea class="bg-blue-200 rounded text-[23px]" placeholder="Write Something about you...." name="summary"><%= profile?.summary || '' %></textarea>
+        <label for="dob" class="text-[25px] font-semibold font-[Poppins] text-white">Date of Birth</label>
+        <input type="date" class="bg-blue-200 rounded text-[23px]" name="dob" required value="<% profile?.dateofbirth || '' %>">
+        <label for="education" class="text-[25px] font-semibold font-[Poppins] text-white" >Education</label>
+        <textarea class="bg-blue-200 rounded text-[23px]" placeholder="Education" name="education"><%= profile?.education || '' %>></textarea>
+        <label for="profession" class="text-[25px] font-semibold font-[Poppins] text-white">Current Profession</label>
+        <input type="text" class="bg-blue-200 rounded text-[23px]" placeholder="Current Profession" name="profession" value="<%= profile?.currentprofession || '' %>">
+        <label for="profession" class="text-[25px] font-semibold font-[Poppins] text-white">Experience</label>
+        <input type="number" class="bg-blue-200 rounded text-[23px]" placeholder="Experience" name="experience" value="<%= profile?.experience || '' %>">
+        <label for="contact" class="text-[25px] font-semibold font-[Poppins] text-white">Contact Info</label>
+        <input type="tel" class="bg-blue-200 rounded text-[23px]" name="mobile" placeholder="+91 9876543210" maxlength="10" minlength="10" value="<%= profile?.mobile || '' %>">
+        <label for="skills" class="text-[25px] font-semibold font-[Poppins] text-white">Skills</label>
+        <input type="text" class="bg-blue-200 rounded text-[23px]" placeholder="HTML,CSS,JS" name="skills" value="<%= profile?.skills || '' %>">
+        <label for="address" class="text-[25px] font-semibold font-[Poppins] text-white">Address</label>
+        <textarea class="bg-blue-200 rounded text-[23px]" name="address" placeholder="Address"><%= profile?.address || '' %></textarea>
+        <label for="city" class="text-[25px] font-semibold font-[Poppins] text-white">City</label>
+        <input type="text" class="bg-blue-200 rounded text-[23px]" placeholder="City" name="city" value="<%= profile?.city || '' %>">
+        <label for="state" class="text-[25px] font-semibold font-[Poppins] text-white">State</label>
+        <input type="text" class="bg-blue-200 rounded text-[23px]" placeholder="State" name="state" value="<%= profile?.state || '' %>">
+        <label for="resume" >Resume</label>
+        <input type="file" name="resume" accept="application/pdf"/>
+        <button type="submit" class="bg-green-400 text-[25px] font-bold text-rose-500 hover:bg-green-300">Submit</button>
+    </form>
+</body>
+<script>
+    function onUpdate(){
+        document.querySelector(".profile-view").style.display="none";
+        document.querySelector(".updateForm").style.display="flex";
+    }
+    document.addEventListener("DOMContentLoaded",()=>{
+        document.querySelector(".profile-view").style.display="flex";
+        document.querySelector(".updateForm").style.display="none";
+    })
+</script>
+</html>
