@@ -16,10 +16,16 @@
     "express": "^5.1.0",
     "express-session": "^1.18.2",
     "mongoose": "^8.16.4",
+<<<<<<< HEAD
     "moongose": "^1.0.0",
     "multer": "^2.0.2",
     "node-cron": "^4.2.1",
     "nodemailer": "^7.0.5",
     "nodemon": "^3.1.11"
+=======
+    "multer": "^2.0.2",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^7.0.5"
+>>>>>>> e6067906a339bc81da96df46d20344180e02461f
   }
 }
