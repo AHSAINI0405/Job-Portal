@@ -51,7 +51,7 @@ router.post('/employeer/update-status/:id', async (req, res) => {
 
     
     const mailOptions = {
-      from: `"${application.companyName} HR" "sainikataria2002@gmail.com"}`,
+      from: `'${application.companyName} HR <no-reply@jobportal.com>'`,
       to: application.email,
       subject: `Application ${status} - ${application.job_title}`,
       html: `
