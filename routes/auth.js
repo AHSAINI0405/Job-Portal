@@ -50,8 +50,8 @@ router.post("/register", async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "sainikataria2002@gmail.com",
-        pass: "kroalnhfwkvnywjp",
+        user:process.env.OTP_MAIL,
+        pass: process.env.PASS,
       },
     });
 
@@ -73,8 +73,8 @@ router.post("/register", async (req, res) => {
   }
 });
 
-//otp
-// POST: /verify-otp
+
+// verify-otp
 router.post("/verify-otp", async (req, res) => {
   const { otp } = req.body;
   const { tempUser, otp: sessionOtp, otpExpires } = req.session;
